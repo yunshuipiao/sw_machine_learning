@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 import seaborn as sns
+import pandas as pd
 
 
 def sinplot(flip=1):
@@ -11,8 +12,11 @@ def sinplot(flip=1):
     plt.show()
 
 if __name__ == '__main__':
-    pass
-
-    # sns.set()
-    # sinplot()
-
+    # fig, ax = plt.subplots()
+    #
+    # tips = sns.load_dataset("tips")
+    # print(tips)
+    # sns.violinplot(x="total_bill", data=tips)
+    # plt.show()
+    data = np.random.normal(size=(20, 6)) + np.arange(6) / 2
+    print(data)
