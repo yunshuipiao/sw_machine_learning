@@ -2,3 +2,4 @@
 *.iml
 *.xml
 *.pyc
+*/.ipynb_checkpoints/*
