@@ -11,10 +11,12 @@
 
 @file: CART.py
 
-@desc: 决策树(CART算法)
+@desc: 决策树(CART)， 分类回归树
 
 @hint:
 """
+
+import numpy as np
 
 class Tree:
     def __init__(self, value=None, trueBranch=None, falseBranch=None, results=None, col=-1, summary=None, data=None):
@@ -25,6 +27,13 @@ class Tree:
         self.col = col
         self.summary = summary
         self.data = data
+
+    def __str__(self):
+        print(self.col, self.value)
+        print(self.results)
+        print(self.summary)
+        return ""
+
 
 def calculateDiffCount(datas):
     # 将输入的数据汇总(input, dataSet)
@@ -47,7 +56,7 @@ def gini(rows):
     results = calculateDiffCount(rows)
     imp = 0.0
     for i in results:
-        imp = results[i] / length * results[i] / length
+        imp += results[i] / length * results[i] / length
     return 1 - imp
 
 def splitDatas(rows, value, column):
@@ -96,24 +105,25 @@ def buildDecisionTree(rows, evaluationFunction=gini):
                 best_value = (col, value)
                 best_set = (list1, list2)
     dcY = {'impurity': '%.3f' % currentGain, 'sample': '%d' % rows_length}
-
+    #
     # stop or not stop
+
     if best_gain > 0:
         trueBranch = buildDecisionTree(best_set[0], evaluationFunction)
         falseBranch = buildDecisionTree(best_set[1], evaluationFunction)
-        return Tree(col = best_value[0], value = best_value[1], trueBranch = trueBranch, falseBranch=falseBranch, summary=dcY)
+        return Tree(col=best_value[0], value = best_value[1], trueBranch = trueBranch, falseBranch=falseBranch, summary=dcY)
     else:
         return Tree(results=calculateDiffCount(rows), summary=dcY, data=rows)
 
 
 def prune(tree, miniGain, evaluationFunction=gini):
     # 剪枝 when gain < mini Gain, 合并（merge the trueBranch and falseBranch）
-    if tree.trueBranch.result == None:
+    if tree.trueBranch.results == None:
         prune(tree.trueBranch, miniGain, evaluationFunction)
-    if tree.falseBranch.result == None:
+    if tree.falseBranch.results == None:
         prune(tree.falseBranch, miniGain, evaluationFunction)
 
-    if tree.trueBranch.result != None and tree.falseBranch.result != None:
+    if tree.trueBranch.results != None and tree.falseBranch.results != None:
         len1 = len(tree.trueBranch.data)
         len2 = len(tree.falseBranch.data)
         len3 = len(tree.trueBranch.data + tree.falseBranch.data)
@@ -125,7 +135,7 @@ def prune(tree, miniGain, evaluationFunction=gini):
         if gain < miniGain:
             tree.data = tree.trueBranch.data + tree.falseBranch.data
             tree.results = calculateDiffCount(tree.data)
-            tree.falseBranch = None
+            tree.trueBranch = None
             tree.falseBranch = None
 
 def classify(data, tree):
@@ -146,10 +156,25 @@ def classify(data, tree):
                 branch = tree.falseBranch
         return classify(data, branch)
 
+
+def loadCSV():
+    def convertTypes(s):
+        s = s.strip()
+        try:
+            return float(s) if '.' in s else int(s)
+        except ValueError:
+            return s
+    data = np.loadtxt("datas.csv", dtype='str', delimiter=',')
+    data = data[1:, :]
+    dataSet =([[convertTypes(item) for item in row] for row in data])
+    return dataSet
+
 # 画树
 
-
-
-
-
-
+if __name__ == '__main__':
+    dataSet = loadCSV()
+    decisionTree = buildDecisionTree(dataSet, evaluationFunction=gini)
+    prune(decisionTree, 0.4)
+    test_data = [5.9,3,4.2,1.5]
+    r = classify(test_data, decisionTree)
+    print(r)
