@@ -38,6 +38,10 @@ class Tree:
 def calculateDiffCount(datas):
     # 将输入的数据汇总(input, dataSet)
     # return results Set{type1:type1Count, type2:type2Count .... typeN:typeNCount}
+    """
+    该函数是计算gini值的辅助函数，假设输入的dataSet为为['A', 'B', 'C', 'A', 'A', 'D']，
+    则输出为['A':3,' B':1, 'C':1, 'D':1]，这样分类统计dataSet中每个类别的数量
+    """
     results = {}
     for data in datas:
         # data[-1] means dataType
