@@ -17,8 +17,6 @@
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
-from sklearn import linear_model
 from sklearn import tree
 from sklearn import svm
 from sklearn import neighbors
@@ -47,10 +45,13 @@ def shuffle_in_unison(a, b):
 
 def load_iris_data():
     iris = load_iris()
-    # X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.3, random_state=0)
-    iris.data, iris.target = shuffle_in_unison(iris.data, iris.target)
-    x_train, x_test = iris.data[:100], iris.data[100:]
-    y_train, y_test = iris.target[:100].reshape(-1, 1), iris.target[100:].reshape(-1, 1)
+    x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.3, random_state=0)
+    print(len(y_test))
+    # iris.data, iris.target = shuffle_in_unison(iris.data, iris.target)
+    # x_train, x_test = iris.data[:100], iris.data[100:]
+    # y_train, y_test = iris.target[:100].reshape(-1, 1), iris.target[100:].reshape(-1, 1)
+    # y_train = y_train.ravel()
+    # y_test = y_test.ravel()
     return x_train, y_train, x_test, y_test
 
 
@@ -67,8 +68,8 @@ clfs = {'svm': svm.SVC(),\
         }
 
 def try_different_method(clf):
-    clf.fit(x_train,y_train.ravel())
-    score = clf.score(x_test,y_test.ravel())
+    clf.fit(x_train,y_train)
+    score = clf.score(x_test,y_test)
     print('the score is :', score)
 
 
