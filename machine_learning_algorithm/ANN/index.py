@@ -49,8 +49,9 @@ class NeuralNetwork:
         #len(layers)-1的目的是 输出层不需要赋予权值
         for i in range(1, len(layers) - 1):
             # 对当前层与前一层之间的连线进行权重赋值， 在-0.25-0.25之间
-            self.weight.append( (2 * np.random.random((layers[i - 1 ] + 1, layers[i] + 1)) - 1) * 0.25 )
-            self.weight.append( (2 * np.random.random((layers[i] + 1, layers[i + 1] + 1)) - 1) * 0.25 )
+            self.weight.append( (2 * np.random.random((layers[i - 1] + 1, layers[i] + 1)) - 1) * 0.25)
+            self.weight.append( (2 * np.random.random((layers[i] + 1, layers[i + 1] + 1)) - 1) * 0.25)
+
 
     def fit(self, X, y, learning_rate = 0.2, epochs = 10000):
         # X表示训练集， 通常模拟成一个二维矩阵，每一层代表一个样本的不同特征
@@ -72,7 +73,7 @@ class NeuralNetwork:
 
             #正向更新
             for l in range(len(self.weight)): #循环遍历每一层
-                a.append(self.activation(np.dot(a[l], self.weight[1])))
+                a.append(self.activation(np.dot(a[l], self.weight[l])))
 
             error = y[i] - a[-1]
             deltas = [error * self.activation_detiv(a[-1])]
@@ -87,9 +88,24 @@ class NeuralNetwork:
                 delta = np.atleast_2d(deltas[i]) #delta存的是误差
                 self.weight[i] += learning_rate * layer.T.dot(delta)
 
+    def predict(self, x):
+        x = np.array(x)
+        temp = np.ones(x.shape[0] + 1)
+        temp[0:-1] = x
+        a = temp
+        for l in range(0, len(self.weight)):
+            a = self.activation(np.dot(a, self.weight[l]))
+        return a
+
+
 
 if __name__ == '__main__':
-    # i = (2 * np.random.random((2, 2)) - 1 ) * 0.25
-    # print(i)
-    a = [1, 2, 3]
-    print(np.atleast_2d(a))
+    # 进行测试
+    # nn = NeuralNetwork([2, 1], 'tanh')
+    # X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+    # y = np.array([0, 0, 1, 1])
+    # nn.fit(X, y)
+    # for i in [[0, 0], [0, 1], [1, 0], [1, 1]]:
+    #     print(nn.predict(i))
+    i = np.random.random((3, 2))
+    print(i * 2)
