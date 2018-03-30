@@ -36,20 +36,17 @@ class Stock:
 
 stocks_code = [
     Stock("kedaxunfei", "002230"),
-    # Stock("hengshengdianzi", "600570"),
-    # Stock("ziguangguoxin", "002049"),
-    # Stock("longjigufen", "601012"),
-    # # Stock("360     ", "601360"),
-    # Stock("shangpinzhaipei", "300616"),
-    # # Stock("腾讯控股", "H00700"),
-    # Stock("dongfangwangli", "300367"),
-    # Stock("yiligufen", "600887"),
-    # Stock("yongyouwangluo", "600588"),
-    # Stock("dongfangguoxin", "300166"),
-    # Stock("dongfangguoxin", "300367"),
-    # Stock("zhaoshangyinhang", "600036"),
-    # Stock("zhongguopinan", "601318"),
-    # Stock("shengheziyuan", "600392"),
+    Stock("hengshengdianzi", "600570"),
+    Stock("ziguangguoxin", "002049"),
+    Stock("longjigufen", "601012"),
+    Stock("shangpinzhaipei", "300616"),
+    Stock("yiligufen", "600887"),
+    Stock("yongyouwangluo", "600588"),
+    Stock("dongfangwangli", "300166"),
+    Stock("dongfangguoxin", "300367"),
+    Stock("zhaoshangyinhang", "600036"),
+    Stock("zhongguopinan", "601318"),
+    Stock("shengheziyuan", "600392"),
 ]
 
 def high_low_p():
@@ -74,12 +71,18 @@ def high_low_p():
 
 def deal_time():
     for s in stocks_code:
-        stock_data = ts.get_hist_data(s.code, ktype='30')
-        print(stock_data.head(50))
+        stock_data = ts.get_hist_data(s.code, ktype='5')
+        # stock_data.to_csv('data.csv')
+        stock_data = stock_data.as_matrix()
+        plt.plot(stock_data[:, 0])
+        plt.show()
+
 
 
 if __name__ == '__main__':
-    deal_time()
+    high_low_p()
+    # deal_time()
+
     # total_data = stock_data
     # total_data = np.column_stack((total_data, p_change))
 
