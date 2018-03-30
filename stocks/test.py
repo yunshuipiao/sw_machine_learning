@@ -35,7 +35,7 @@ class Stock:
         self.name = name
 
 stocks_code = [
-    # Stock("kedaxunfei", "002230"),
+    Stock("kedaxunfei", "002230"),
     # Stock("hengshengdianzi", "600570"),
     # Stock("ziguangguoxin", "002049"),
     # Stock("longjigufen", "601012"),
@@ -46,12 +46,13 @@ stocks_code = [
     # Stock("yiligufen", "600887"),
     # Stock("yongyouwangluo", "600588"),
     # Stock("dongfangguoxin", "300166"),
+    # Stock("dongfangguoxin", "300367"),
     # Stock("zhaoshangyinhang", "600036"),
     # Stock("zhongguopinan", "601318"),
     # Stock("shengheziyuan", "600392"),
 ]
 
-if __name__ == '__main__':
+def high_low_p():
     for s in stocks_code:
         stock_data = ts.get_hist_data(s.code)
         # print(stock_data.head(5))
@@ -70,6 +71,15 @@ if __name__ == '__main__':
         plt.title(s.name)
         plt.legend()
         plt.show()
+
+def deal_time():
+    for s in stocks_code:
+        stock_data = ts.get_hist_data(s.code, ktype='30')
+        print(stock_data.head(50))
+
+
+if __name__ == '__main__':
+    deal_time()
     # total_data = stock_data
     # total_data = np.column_stack((total_data, p_change))
 
