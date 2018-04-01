@@ -37,16 +37,16 @@ class Stock:
 stocks_code = [
     Stock("kedaxunfei", "002230"),
     Stock("hengshengdianzi", "600570"),
-    Stock("ziguangguoxin", "002049"),
-    Stock("longjigufen", "601012"),
-    Stock("shangpinzhaipei", "300616"),
-    Stock("yiligufen", "600887"),
-    Stock("yongyouwangluo", "600588"),
-    Stock("dongfangwangli", "300166"),
-    Stock("dongfangguoxin", "300367"),
-    Stock("zhaoshangyinhang", "600036"),
-    Stock("zhongguopinan", "601318"),
-    Stock("shengheziyuan", "600392"),
+    # Stock("ziguangguoxin", "002049"),
+    # Stock("longjigufen", "601012"),
+    # Stock("shangpinzhaipei", "300616"),
+    # Stock("yiligufen", "600887"),
+    # Stock("yongyouwangluo", "600588"),
+    # Stock("dongfangwangli", "300166"),
+    # Stock("dongfangguoxin", "300367"),
+    # Stock("zhaoshangyinhang", "600036"),
+    # Stock("zhongguopinan", "601318"),
+    # Stock("shengheziyuan", "600392"),
 ]
 
 def high_low_p():
@@ -56,15 +56,16 @@ def high_low_p():
         # print(stock_data.head(10))
         stock_data = stock_data.head(length).as_matrix()
         p_change = stock_data[:, 6]
-        p_change[:-1] = p_change[1:]
+        # p_change[:-1] = p_change[1:]
         high_change = (stock_data[:, 1] - stock_data[:, 0]) / stock_data[:, 0] * 100
         # print(high_change[0:5])
         low_change = (stock_data[:, 3] - stock_data[:, 0]) / stock_data[:, 0] * 100
         # print(low_change[0:5])
-
+        # print(stock_data[0:5, :])
         x = np.arange(0, length)
         plt.plot(x, high_change, "ro-", label="high")
         plt.plot(x, low_change, "go-", label="low")
+        # plt.plot(x, stock_data[:, 6], "bo-", label="p")
         plt.title(s.name)
         plt.legend()
         plt.show()
