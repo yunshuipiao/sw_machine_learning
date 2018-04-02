@@ -54,7 +54,7 @@ def high_low_p():
         stock_data = ts.get_k_data(s.code)
         # print(stock_data.head(5))
         # print(stock_data.head(10))
-        stock_data = stock_data.head(length).as_matrix()
+        stock_data = stock_data.tail(length).as_matrix()
         # p_change = stock_data[:, 6]
         # p_change[:-1] = p_change[1:]
         high_change = (stock_data[:, 3] - stock_data[:, 1]) / stock_data[:, 1] * 100
@@ -65,6 +65,8 @@ def high_low_p():
         x = np.arange(0, length)
         plt.plot(x, high_change, "ro-", label="high")
         plt.plot(x, low_change, "go-", label="low")
+        my_y_ticks = np.arange(-7, 8, 1)
+        plt.yticks(my_y_ticks)
         # plt.plot(x, stock_data[:, 6], "bo-", label="p")
         plt.title(s.name)
         plt.legend()
