@@ -35,18 +35,18 @@ class Stock:
         self.name = name
 
 stocks_code = [
-    # Stock("kedaxunfei", "002230"),
-    # Stock("hengshengdianzi", "600570"),
-    # Stock("ziguangguoxin", "002049"),
+    Stock("kedaxunfei", "002230"),
+    Stock("hengshengdianzi", "600570"),
+    Stock("ziguangguoxin", "002049"),
     Stock("zhongkeshuguang", "603019"),
-    # Stock("longjigufen", "601012"),
-    # Stock("yiligufen", "600887"),
-    # Stock("yongyouwangluo", "600588"),
-    # Stock("dongfangwangli", "300166"),
-    # Stock("dongfangguoxin", "300367"),
-    # Stock("zhaoshangyinhang", "600036"),
-    # Stock("zhongguopinan", "601318"),
-    # Stock("shengheziyuan", "600392"),
+    Stock("longjigufen", "601012"),
+    Stock("yiligufen", "600887"),
+    Stock("yongyouwangluo", "600588"),
+    Stock("dongfangwangli", "300166"),
+    Stock("dongfangguoxin", "300367"),
+    Stock("zhaoshangyinhang", "600036"),
+    Stock("zhongguopinan", "601318"),
+    Stock("shengheziyuan", "600392"),
 ]
 
 def high_low_p():
@@ -54,12 +54,16 @@ def high_low_p():
         stock_data = ts.get_k_data(s.code)
         # print(stock_data.head(5))
         # print(stock_data.head(10))
-        stock_data = stock_data.tail(length).as_matrix()
+        stock_data = stock_data.as_matrix()
         # p_change = stock_data[:, 6]
         # p_change[:-1] = p_change[1:]
-        high_change = (stock_data[:, 3] - stock_data[:, 1]) / stock_data[:, 1] * 100
+        stock_close_data = stock_data[:, 2]
+        stock_close_data[1:] = stock_close_data[:-1]
+        stock_data = stock_data[-length:, :]
+        stock_close_data = stock_close_data[-length:]
+        high_change = (stock_data[:, 3] - stock_close_data) / stock_close_data * 100
         # print(high_change[0:5])
-        low_change = (stock_data[:, 4] - stock_data[:, 1]) / stock_data[:, 1] * 100
+        low_change = (stock_data[:, 4] - stock_close_data) / stock_close_data * 100
         # print(low_change[0:5])
         # print(stock_data[0:5, :])
         x = np.arange(0, length)
