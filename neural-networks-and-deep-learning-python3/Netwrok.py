@@ -24,6 +24,10 @@ def sigmoid(z):
     return 1.0 / (1.0 + np.exp(-z))
 
 
+def sigmoid_prime(z):
+    return sigmoid(z) * (1 - sigmoid(z))
+
+
 class Network(object):
     def __init__(self, sizes):
         self.num_layers = len(sizes)
@@ -72,7 +76,58 @@ class Network(object):
         :param eta:
         :return:
         """
+        nabla_b = [np.zeros(b.shape) for b in self.biases]
+        nabla_w = [np.zeros(w.shape) for w in self.weights]
 
+        for x, y in mini_batch:
+            delta_nabla_b, delta_nabla_w = self.backprop(x, y)
+            nabla_b = [nb + dnb for nb, dnb in zip(nabla_b, delta_nabla_b)]
+            nabla_w = [nw + dnw for nw, dnw in zip(nabla_w, delta_nabla_w)]
+
+        self.weights = [w - (eta / len(mini_batch)) * nw
+                        for w, nw in zip(self.weights, nabla_w)]
+        self.biases = [b - (eta / len(mini_batch)) * nb
+                       for b, nb in zip(self.biases, nabla_b)]
+
+    def backprop(self, x, y):
+        """
+        :param x:
+        :param y:
+        :return: (nabla_b, nabla_w): gradient for 损失函数，类似于biaes， weight。
+        """
+        nabla_b = [np.zeros(b.shape) for b in self.biases]
+        nabla_w = [np.zeros(w.shape) for w in self.weights]
+        # feedforward
+        activation = x
+        activations = [x]  # 存储所有的激活值
+        zs = []  # 存储所有的z向量
+        for b, w in zip(self.biases, self.weights):
+            z = np.dot(w, activation) + b
+            zs.append(z)
+            activation = sigmoid(z)
+            activations.append(activation)
+
+        # backward pass
+        delta = self.cost_derivative(activation[-1], y) * \
+                sigmoid_prime(zs[-1])
+        nabla_b = delta
+        nabla_w = np.dot(delta, activations[-2].transpose())
+
+        for l in range(2, self.num_layers):
+            z = zs[-1]
+            sp = sigmoid_prime(z)
+            delta = np.dot(self.weights[-l + 1].transpose(), delta) * sp
+            nabla_b[-l] = delta
+            nabla_w[-l] = np.dot(delta, activations[-l - 1].transpose())
+        return nabla_b, nabla_w
+
+    def cost_derivative(self, output_activations, y):
+        """
+        :param output_activations:
+        :param y:
+        :return: 给定输出激发， 返回偏导数向量
+        """
+        return output_activations - y
 
 
 if __name__ == '__main__':
