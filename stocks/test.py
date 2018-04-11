@@ -36,23 +36,23 @@ class Stock:
 
 stocks_code = [
     Stock("kedaxunfei", "002230"),
-    Stock("hengshengdianzi", "600570"),
-    Stock("ziguangguoxin", "002049"),
+    # Stock("hengshengdianzi", "600570"),
+    # Stock("ziguangguoxin", "002049"),
     Stock("zhongkeshuguang", "603019"),
-    Stock("longjigufen", "601012"),
-    Stock("yiligufen", "600887"),
+    # Stock("longjigufen", "601012"),
+    # Stock("yiligufen", "600887"),
     Stock("yongyouwangluo", "600588"),
-    Stock("dongfangwangli", "300166"),
-    Stock("dongfangguoxin", "300367"),
-    Stock("zhaoshangyinhang", "600036"),
-    Stock("zhongguopinan", "601318"),
-    Stock("shengheziyuan", "600392"),
+    # Stock("dongfangwangli", "300367"),
+    Stock("dongfangguoxin", "300166"),
+    # Stock("zhaoshangyinhang", "600036"),
+    # Stock("zhongguopinan", "601318"),
+    # Stock("shengheziyuan", "600392"),
 ]
 
 def high_low_p():
     for s in stocks_code:
         stock_data = ts.get_k_data(s.code)
-        # print(stock_data.head(5))
+        print(stock_data.tail(5))
         # print(stock_data.head(10))
         stock_data = stock_data.as_matrix()
         # p_change = stock_data[:, 6]
