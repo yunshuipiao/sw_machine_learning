@@ -35,15 +35,14 @@ class Stock:
         self.name = name
 
 stocks_code = [
-    Stock("kedaxunfei", "002230"),
-    Stock("dazujiguang", "002008"),
-    Stock("haikangweishi", "002415"),
-    Stock("hengshengdianzi", "600570"),
-    Stock("hainanruize", "002596"),
+    # Stock("kedaxunfei", "002230"),
+    # Stock("dazujiguang", "002008"),
+    # Stock("haikangweishi", "002415"),
+    # Stock("hengshengdianzi", "600570"),
     Stock("ziguangguoxin", "002049"),
     Stock("zhongkeshuguang", "603019"),
     Stock("longjigufen", "601012"),
-    Stock("yiligufen", "600887"),
+    # Stock("yiligufen", "600887"),
     Stock("yongyouwangluo", "600588"),
     Stock("dongfangguoxin", "300166"),
     Stock("lagnchaoxinxi", "000977"),
