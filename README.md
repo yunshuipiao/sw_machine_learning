@@ -23,3 +23,6 @@ machine learning
 * [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/index.html)
 * [colah.github.io](http://colah.github.io/)
 * [非常好的It电子书下载地址 http://www.allitebooks.com](http://www.allitebooks.com)
+
+* [cs229:machine learning](http://cs229.stanford.edu/syllabus.html)
+* [Pattern Recognition and Machine Learning](https://book.douban.com/subject/2061116/)
