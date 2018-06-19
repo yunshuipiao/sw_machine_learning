@@ -16,10 +16,11 @@ machine learning
 * [机器学习之SVM(简单理解)](https://github.com/yunshuipiao/SWBlog/blob/master/maching_learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8BSVM(%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3).md)
 * [机器学习之分类回归树(python实现CART)](https://github.com/yunshuipiao/SWBlog/blob/master/maching_learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%88%86%E7%B1%BB%E5%9B%9E%E5%BD%92%E6%A0%91(python%E5%AE%9E%E7%8E%B0CART).md)
 * [机器学习之GBDT(简单理解)](https://github.com/yunshuipiao/SWBlog/blob/master/maching_learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8BGBDT(%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3).md)
-
-
+  
 ### 推荐阅读
-
+  
 * [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/index.html)
 * [colah.github.io](http://colah.github.io/)
 * [非常好的It电子书下载地址 http://www.allitebooks.com](http://www.allitebooks.com)
+* [cs229:machine learning](http://cs229.stanford.edu/syllabus.html)
+* [Pattern Recognition and Machine Learning](https://book.douban.com/subject/2061116/)
