@@ -27,6 +27,8 @@ machine learning
   线性回归和逻辑回归的原理及公式推导过程，涉及为什么用最小均方，对数损失作为损失函数，以及sigmoid的由来，softmax regression的推导过程，特别值得一读。
 * [Pattern Recognition and Machine Learning](https://book.douban.com/subject/2061116/)  
    模式识别和机器学习的必读书目
+* [svm:支持向量机通俗导论](https://blog.csdn.net/v_july_v/article/details/7624837)  
+  目前看到过svm最全面，并且通俗易懂的教程，从来源，问题的求解，核函数kernel本质，以及证明各方面去了解svm。
 
 ### interview
 
