@@ -1,0 +1,448 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{01}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    在机器学习的算法中，经常会出现很多的符号和计算公式，那么对其有一个基本的认识是非常重要的。
+
+    \subsection{数学符号}\label{ux6570ux5b66ux7b26ux53f7}
+
+    \subsubsection{集合和区间}\label{ux96c6ux5408ux548cux533aux95f4}
+
+    \(\mathbb{Z}\): 整数集：\{...-2, -1, 0, 1, 2...\}\\
+\(\mathbb{N}\): 自然数集：\{0，1， 2，3....\}\\
+\(\mathbb{N}^{+}\): 不包括零的自然数集:\{1, 2,3...\}\\
+\(\mathbb{R}\): 实数集\\
+\(\in\): 集合内元素符号.比如：\texttt{\$\textbackslash{}in\$A}
+表示x是集合A中的一个元素\\
+\(\notin\): 与上面相反，不是集合内的元素\\
+\(\varnothing\): 空集或者null集\\
+A \(\cup\) B: A， B集合的并集\\
+A \(\cap\) B: A， B集合的交集\\
+A \(\subseteq\): A是B的子集\\
+A\(\bigtriangleup\)B:
+两个集合的对称差：只属于其中一个集合，而不属于另一个集合的元素组成的集合。例如：集合\{1，2，3\}
+和集合\{3，4\}的对称差是\{1, 2, 4\}。\\
+\(\left | A \right |\): 集合A的基数(元素的个数)\\
+\(\left(a，b \right)\): 从a到b的开区间，不包括a， b.\\
+\(\left [ a, b \right ]\): 从a到b的闭区间， 包括a,b.
+
+    \subsubsection{序列}\label{ux5e8fux5217}
+
+    \(\sum_{i=1}^{n}x_{i}\): 下标变量\(x_{i}\)的和，等于
+\(x_{1} + x_{2} + ... + x_{n}\)\\
+\(\prod_{i=1}^{n}x_{i}\): 下标变量\(x_{i}\)的积，等于
+\(x_{1} * x_{2} * ... * x_{n}\)
+
+    \subsubsection{函数}\label{ux51fdux6570}
+
+    \(f:A \rightarrow B\): 表示函数f， 定义域A和值域B。\\
+\(\left(g \circ f \right)\left(x \right)\): 两个函数g和f和组合形式：
+\(g[f(x)]\)\\
+\(f^{-1}(x)\): 函数f的逆， 如果\(f^{-1}\)表示y， 那么\(f(y)=x\)。\\
+\(|x|\): x的绝对值， 注意与集合的区别\\
+\(log_{b}, log\): 底数为b的对数和自然对数(底数为e)\\
+\(n!\): n的阶乘\\
+\(\binom{k}{n}\): 二项式系数(n选择k):
+\(= \frac{n!}{k!(n-k)!} (0\leq k\leq n)\)\\
+\(arg max f(x)\): 使f(x)尽可能的大的x值
+
+    \subsubsection{线性代数}\label{ux7ebfux6027ux4ee3ux6570}
+
+    \(x\): 标量，小写的斜体 \(\mathbf{x}\): 列向量(小写,粗体, n * 1的矩阵)\\
+\(\mathbf{a} \cdot \mathbf{b}\): 两个向量的点积。 如果a和b都是n *
+1的矩阵，也写作 \(\mathbf{a}^{\boldsymbol{\mathbf{T}}} \mathbf{b}\),
+\(=\sum_{i=1}^{n}a_{i}b_{i}\)\\
+\(\mathbf{X}\): m * n的矩阵，大写粗体\\
+\(\mathbb{R}^{n}\): 坐标空间， 有n个长度的列向量表示。
+\(\mathbf{x} = \begin{bmatrix}x_{1}\\ x_{2}\\ ...\\ x_{n}\end{bmatrix}\)\\
+\(\mathbf{x}^T\) : n*1向量的转置。
+\(\mathbf{x}^{T} =\begin{bmatrix} x_{1}& x_{2}& ...& x_{n}\end{bmatrix} = \begin{bmatrix}x_{1}\\ x_{2}\\ ...\\ x_{n}\end{bmatrix}^{T}\)\\
+\(\left \| \mathbf{x} \right \|_{p}\): Lp norm，p-norm向量。\\
+\(\left \| \mathbf{x} \right \|_{p} = (|x_{1}^{p}| + |x_{2}^{p}| + ... + |x_{n}^{p}|)^{1/p}\)\\
+\(\left \| \mathbf{x} \right \|_{\infty }\): 最大norm，
+向量绝对值的最大值. \(=max|x_{i}|\)。\\
+\(\left \| \mathbf{x} \right \|_{2}\): 向量norm，
+l2norm。\(=||\mathbf{x}||_{2}\)
+
+\(A_{i,:}\): 矩阵的第i行\\
+\(A_{:,j}\): 矩阵的第j列\\
+\(A^{T}\): 矩阵的转置矩阵。 \(A_{i, j} \rightarrow A_{T}^{j, i}\)\\
+\(I_n\): n*n的单位矩阵。
+\(I_3 = \begin{bmatrix}1 &0 &0 \\ 0& 1 & 0\\ 0&0 &1 \end{bmatrix}\)\\
+\(A^{-1}\): A矩阵的逆矩阵, \(A^{-1}A = AA^{-1} = I\)\\
+tr \(A\): 矩阵的迹。 主对角的元素和(左上到右下)\\
+det \(A\): 矩阵A的行列式\\
+diag\((a_1, a_2, ..., a_n)\)： 对角矩阵，矩阵的对角线为a1, a2, a3..，
+其他元素为0的矩阵。\\
+\(A\odot B\): Hadamard乘积，矩阵对应元素的乘积
+
+    \subsubsection{微积分}\label{ux5faeux79efux5206}
+
+    \(\underset{x\to a}{\lim{}}f(x)\): 当x趋于a时f (x)的极限\\
+\(\underset{x\to a-}{\lim{}}f(x)\): 当x从左边趋于a时f (x)的极限\\
+\(\underset{x\to a+}{\lim{}}f(x)\): 当x从右边趋于a时f (x)的极限
+
+    \(\frac{\mathrm{d} f}{\mathrm{d} x}\): f函数的导数\\
+\(\frac{\mathrm{d^n} f}{\mathrm{d} x^n}\): f函数的n阶导数\\
+\(\frac{\partial f}{\partial x}\): 函数f(x, y..)对标量x的偏导数。
+
+\(\triangledown f\): 函数\(f: \mathbb{R}^n \to \mathbb{R}\)的梯度，
+分别是对每个变量的偏导数。\\
+\(\triangledown f(x_1, x_2, ..., x_n) = \begin{bmatrix}\frac{\partial f}{\partial x_1}\\ \frac{\partial f}{\partial x_2}\\ ... \\\frac{\partial f}{\partial x_4}\end{bmatrix}\)\\
+\(\triangle f\): 函数f 的laplacian的算子\\
+\(\triangle f = \sum_{i=1}^{n}\frac{\partial^2 f}{\partial x^2}\)
+
+\(\int f(x)dx\): 函数f(F的导数)的不定积分。\\
+\(\int_{a}^{b}f(x)dx\)
+
+    \subsubsection{概率与统计}\label{ux6982ux7387ux4e0eux7edfux8ba1}
+
+    \(P(A\cap B)\): 事件A和B共同发生的概率\\
+\(P(A\cup B)\): 事件A或者B发生的概率\\
+\(P(A|B)\): 给定B条件，A发生的概率\\
+\$E(x),\mu\_X \$: 随机变量X的期望值(平均值)， 对于离散变量X，
+\(E(X)=\sum_{i=1}^{\infty}p_ix_i\)。表示xi发生的概率pi\\
+\(\bar{X}\): 样本数值数据的平均值\\
+\(var(X), \sigma_x^2\):
+数值数据的方差。\(var(X)=E[(X-\mu_X)^2] = E(X^2) - E(X)^2\)\\
+\(s_X^2\):
+样本数值数据的方差：\(s_X^2 = \frac{1}{n}\sum_{i=1}^{n}(X_i- \bar{X})^2\)\\
+\(std(X), \sigma_x\): 随机变量的标准差，方差的平方根\\
+\(s_X\): 样本标准差，样本\(s_X^2\)方差的平方根
+
+\(cov(X, Y)\): 两个随机变量X和Y的协方差
+\(cov(X,Y) = E[(X-E(X))(Y-E(Y))] = E(XY)-E(X)E(Y)\)\\
+\(s_{XY}\)： 数值数据的样本协方差
+\(s_{XY} = \frac{1}{n}\sum_{i=1}^{n}(X_i-\bar{X})(Y_i-\bar{Y})\)\\
+\(corr(X, Y)\): 两个随机变量X和Y的相关系数。
+\(=\frac{cov(X, Y)}{\sigma_x \sigma_Y}\).\\
+\(H(X)\): 随机变量X的熵。\\
+离散：\(H(X)=-\sum_xP(X=x)\log_bP(X=x)\)\\
+连续： \(H(x)=-\int_{-\infty}^{\infty}f(x)\log_bf(x)dx\)
+
+PMF: 离散随机变量的概率质量函数，\(f(x)=P(X=x)\)\\
+CDF: 连续随机变量的累积分布函数, \(F(x)=P(X\leq x)\)\\
+PDF: 连续随机变量的概率密度函数: \(P(X\in [a,b]) = \int_{a}^{b}f(x)dx\)
+
+X \textasciitilde{} D: 随机变量X的分布D。\\
+\(\hat{\theta}\): 参数的估计量(estimator)。\\
+\(N(x, \mu, \sigma^2)\): 随变量x的正态(高斯)分布，均值为\(\mu\)，
+方差为\(\sigma^2\)。 常用的有\(N(x, 0, 1)\).
+
+    \subsubsection{数字}\label{ux6570ux5b57}
+
+    \(e\): 欧拉数，数学常数近似于2.71828。\\
+\(\pi\): 'pi', 数值场数，近似于3.1415926.\\
+\(\infty\): 无穷大符号\\
+\(1.234*10^5\): 科学计数法， 表示123,400 或者 1.234E05\\
+\(\ll\): 小小于
+
+    \subsubsection{近似}\label{ux8fd1ux4f3c}
+
+    \(\approx\): 大致相等。\(e\approx 2.71828\).\\
+\(f(x)\sim g(x)\): 表示两个函数的比值接近1. 如果x很小，
+\(\lim_{x\to 0}\frac{f(x)}{g(x)}=1\); 如果x很大，
+\(\lim_{x\to \infty}\frac{f(x)}{g(x)}=1\)
+
+\(f(x) \propto g(x)\): 两个函数是成比例的\\
+\(T\in O(n^2)\):
+大O计数法：表示有\(n^2\)种算法；或者算法的复杂度为\(n^2\)。
+
+    \subsubsection{逻辑}\label{ux903bux8f91}
+
+    \$ \Rightarrow \(: implication 操作。比如\) A\Rightarrow B\$ 表示"if A
+implies B", ``if A then B'', "B only if A"\\
+\$\Leftrightarrow \$: 相等操作符。 "A if and only if B" 或者 "if A then
+B and if B then A"
+
+\(\wedge\): 逻辑连接 and。\\
+\(\vee\): or。\\
+\$\forall \(: 全称量词，for all。 比如\)\forall x \in \mathbb{R}, x
+\textgreater{} 1\$:对于所有的x属于R，都有x\textgreater{}1.\\
+\(\exists\): 存在量词，exists。 比如
+\(\forall x \in \mathbb{A}, f(x)\):A集合中存在x, 是的f(x)为true。
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
