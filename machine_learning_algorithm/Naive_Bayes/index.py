@@ -60,7 +60,7 @@ def trainNB0(trainMatrix, trainCategory):
     numTrainDocs = len(trainMatrix)  #文档数目
     numWord = len(trainMatrix[0])  #词汇表数目
     print(numTrainDocs, numWord)
-    pAbusive = sum(trainCategory) / len(trainCategory) #p1, 出现侮辱性评论的概率 [0, 1, 0, 1, 0, 1]
+    pAbusive = float(sum(trainCategory)) / len(trainCategory) #p1, 出现侮辱性评论的概率 [0, 1, 0, 1, 0, 1]
     p0Num = np.zeros(numWord)
     p1Num = np.zeros(numWord)
 
@@ -82,7 +82,7 @@ def trainNB0(trainMatrix, trainCategory):
 def trainNB1(trainMatrix, trainCategory):
     numTrainDocs = len(trainMatrix)  #文档数目
     numWord = len(trainMatrix[0])  #词汇表数目
-    pAbusive = sum(trainCategory) / len(trainCategory) #p1, 出现侮辱性评论的概率
+    pAbusive = float(sum(trainCategory)) / len(trainCategory) #p1, 出现侮辱性评论的概率
     p0Num = np.ones(numWord)  #修改为1
     p1Num = np.ones(numWord)
 
